@@ -183,7 +183,7 @@ export default class DayPickerInput extends React.Component {
 
     // Current props
     const { value, formatDate, format, dayPickerProps } = this.props;
-
+    debugger;
     // Update the input value if the `value` prop has changed
     if (value !== prevProps.value) {
       if (isDate(value)) {
