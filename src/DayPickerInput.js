@@ -463,7 +463,7 @@ export default class DayPickerInput extends React.Component {
       onDayChange,
       formatDate,
       format,
-      changeMonthOnClick
+      changeMonthOnClick,
     } = this.props;
     if (dayPickerProps.onDayClick) {
       dayPickerProps.onDayClick(day, modifiers, e);
@@ -501,12 +501,13 @@ export default class DayPickerInput extends React.Component {
     }
 
     const value = formatDate(day, format, dayPickerProps.locale);
-    const stateUpdate = {value, typedValue: undefined};
+    const stateUpdate = { value, typedValue: undefined };
     debugger;
+
     if (changeMonthOnClick) {
       stateUpdate.month = day;
     }
-
+    console.log('stateUpdate :', stateUpdate);
     this.setState(stateUpdate, () => {
       if (onDayChange) {
         onDayChange(day, modifiers, this);
@@ -568,8 +569,7 @@ export default class DayPickerInput extends React.Component {
   }
 
   render() {
-
-    console.log('yay we\'re using our own fork!');
+    console.log("yay we're using our own fork!");
 
     const Input = this.props.component;
     const { inputProps } = this.props;
