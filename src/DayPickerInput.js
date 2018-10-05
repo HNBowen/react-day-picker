@@ -108,6 +108,8 @@ export default class DayPickerInput extends React.Component {
     component: PropTypes.any,
     overlayComponent: PropTypes.any,
 
+    changeMonthOnClick: PropTypes.bool,
+
     classNames: PropTypes.shape({
       container: PropTypes.string,
       overlayWrapper: PropTypes.string,
@@ -142,6 +144,7 @@ export default class DayPickerInput extends React.Component {
       overlayWrapper: 'DayPickerInput-OverlayWrapper',
       overlay: 'DayPickerInput-Overlay',
     },
+    changeMonthOnClick: true,
   };
 
   input = null;
@@ -460,6 +463,7 @@ export default class DayPickerInput extends React.Component {
       onDayChange,
       formatDate,
       format,
+      changeMonthOnClick
     } = this.props;
     if (dayPickerProps.onDayClick) {
       dayPickerProps.onDayClick(day, modifiers, e);
@@ -497,7 +501,13 @@ export default class DayPickerInput extends React.Component {
     }
 
     const value = formatDate(day, format, dayPickerProps.locale);
-    this.setState({ value, typedValue: undefined, month: day }, () => {
+    const stateUpdate = {value, typedValue: undefined};
+
+    if (changeMonthOnClick) {
+      stateUpdate.month = day;
+    }
+
+    this.setState(stateUpdate, () => {
       if (onDayChange) {
         onDayChange(day, modifiers, this);
       }
@@ -558,6 +568,9 @@ export default class DayPickerInput extends React.Component {
   }
 
   render() {
+
+    console.log('yay we\'re using our own fork!');
+    
     const Input = this.props.component;
     const { inputProps } = this.props;
     return (
