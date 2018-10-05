@@ -17,6 +17,7 @@ export default class Example extends React.Component {
       to: undefined,
     };
   }
+
   showFromMonth() {
     const { from, to } = this.state;
     if (!from) {
@@ -26,13 +27,16 @@ export default class Example extends React.Component {
       this.to.getDayPicker().showMonth(from);
     }
   }
+
   handleFromChange(from) {
     // Change the from date and focus the "to" input field
     this.setState({ from });
   }
+
   handleToChange(to) {
     this.setState({ to }, this.showFromMonth);
   }
+
   render() {
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
@@ -50,30 +54,12 @@ export default class Example extends React.Component {
             toMonth: to,
             modifiers,
             numberOfMonths: 2,
-            onDayClick: () => this.to.getInput().focus(),
           }}
           onDayChange={this.handleFromChange}
+          hideOnDayClick={false}
+          changeMonthOnClick={false}
         />{' '}
         —{' '}
-        <span className="InputFromTo-to">
-          <DayPickerInput
-            ref={el => (this.to = el)}
-            value={to}
-            placeholder="To"
-            format="LL"
-            formatDate={formatDate}
-            parseDate={parseDate}
-            dayPickerProps={{
-              selectedDays: [from, { from, to }],
-              disabledDays: { before: from },
-              modifiers,
-              month: from,
-              fromMonth: from,
-              numberOfMonths: 2,
-            }}
-            onDayChange={this.handleToChange}
-          />
-        </span>
         <Helmet>
           <style>{`
   .InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
