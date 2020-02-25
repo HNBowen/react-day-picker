@@ -192,4 +192,6 @@ export interface DayPickerInputProps {
   onFocus?(e: React.FocusEvent<HTMLDivElement>): void;
   onBlur?(e: React.FocusEvent<HTMLDivElement>): void;
   onKeyUp?(e: React.FocusEvent<HTMLDivElement>): void;
+
+  changeMonthOnDayClick?: boolean;
 }
